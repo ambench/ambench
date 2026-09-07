@@ -7,4 +7,4 @@
 	ignore = dirty
 [submodule "ext/openpi"]
 	path = ext/openpi
-	url = https://github.com/ywang760/openpi
+	url = https://github.com/ambench/openpi.git

@@ -56,9 +56,9 @@ upstream listed above. The fork adds two cost functions,
 `smoothness_cost_constant` and `smoothness_cost_se3_const`, which the
 whole-body IK controller uses. It remains MIT licensed.
 
-The openpi submodule still points at a personal fork rather than the upstream
-repository listed above. The license is unchanged, but the pinned revision
-differs from upstream.
+OpenPI is fetched from `https://github.com/ambench/openpi`, an AM-Bench-maintained
+fork of the upstream repository listed above. The fork adds AM-Bench policy
+adapters and training configurations and remains Apache-2.0 licensed.
 
 ## Simulation assets
 
