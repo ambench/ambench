@@ -1,0 +1,110 @@
+# C++
+**/cmake-build*/
+**/build*/
+**/*.so
+**/*.log*
+
+# Omniverse
+**/*.dmp
+**/.thumbs
+
+# No USD files allowed in the repo
+# **/*.usd
+# **/*.usda
+# **/*.usdc
+# **/*.usdz
+
+# Python
+.DS_Store
+**/*.egg-info/
+**/__pycache__/
+**/.pytest_cache/
+**/*.pyc
+**/*.pb
+
+# Virtual environments
+**/.venv/
+**/venv/
+
+# Build outputs from `python -m build`
+dist/
+
+# Captured `list_envs.py` output
+scripts/environments/envs.txt
+
+# Docker/Singularity
+**/*.sif
+docker/cluster/exports/
+docker/.container.cfg
+
+# IDE
+**/.idea/
+**/.vscode/
+# Don't ignore the top-level .vscode directory as it is
+# used to configure VS Code settings
+!.vscode
+
+# Outputs
+**/output/*
+**/outputs/*
+**/videos/*
+**/wandb/*
+**/.neptune/*
+docker/artifacts/
+*.tmp
+
+# Doc Outputs
+**/docs/_build/*
+**/generated/*
+site/
+
+# Isaac-Sim packman
+_isaac_sim*
+_repo
+_build
+.lastformat
+
+# RL-Games
+**/runs/*
+**/logs/*
+**/recordings/*
+
+# Pre-Trained Checkpoints
+/.pretrained_checkpoints/
+
+# Teleop Recorded Dataset
+/datasets/
+
+
+# Docker history
+.isaac-lab-docker-history
+
+# Model training
+*.ckpt
+*.pkl
+checkpoints/
+
+# Ignore ipynb test files
+*.ipynb
+
+# Ignore mpc build files
+c_generated_code/
+acados_ocp.json
+*_mpc_ocp.json
+
+master_shots/
+robot_master_shots/
+
+aws/
+asset_library/
+generated_task_previews/
+paper/
+
+# Latex artifacts
+**/*.aux
+**/*.fdb_latexmk
+**/*.fls
+**/*.synctex.gz
+**/*.out
+
+corl_rebuttal/**

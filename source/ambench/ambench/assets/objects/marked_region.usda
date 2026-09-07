@@ -1,0 +1,101 @@
+#usda 1.0
+(
+    defaultPrim = "marked_region"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "marked_region"
+{
+    custom string am_bench:fixture_set = "MarkedRegion"
+    custom string am_bench:variant = "small"
+    custom string am_bench:dimensions_m = "0.300 x 0.220 x 0.006"
+    custom string am_bench:region_size_m = "0.240 x 0.160"
+    custom string am_bench:tape_width_m = "0.030"
+    custom string am_bench:dimension_policy = "Wrapper may be instanced with non-uniform XY scale for workbench, shelf, or inspection-region variants; task specs should record the resolved region dimensions."
+    custom string am_bench:source_assets = "ReflectiveTape2M5CM_I01_PR_NVD_01.usd"
+    custom string am_bench:source_runtime_layer = "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/DigitalTwin/Assets/Warehouse/Safety/Tape/Reflective/Reflective_I/ReflectiveTape2M5CM_I01_PR_NVD_01.usd"
+    custom string am_bench:source_runtime_note = "Thin wrapper over NVIDIA SimReady reflective tape; task predicate should bind to the local target_region prim, not the remote tape internals."
+    custom string am_bench:task_prims = "target_region"
+
+    def Scope "Looks"
+    {
+        def Material "target_region_debug_blue"
+        {
+            token outputs:surface.connect = </marked_region/Looks/target_region_debug_blue/PreviewSurface.outputs:surface>
+
+            def Shader "PreviewSurface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.10, 0.45, 1.00)
+                float inputs:opacity = 0.30
+                float inputs:roughness = 0.55
+                token outputs:surface
+            }
+        }
+    }
+
+    def Xform "target_region"
+    {
+        custom string am_bench:role = "placement_region"
+        custom string am_bench:region_shape = "rectangle"
+        custom string am_bench:region_size_m = "0.240 x 0.160"
+        double3 xformOp:translate = (0, 0, 0.003)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "debug_surface" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            uniform token purpose = "guide"
+            rel material:binding = </marked_region/Looks/target_region_debug_blue>
+            double size = 1
+            double3 xformOp:translate = (0, 0, 0)
+            double3 xformOp:scale = (0.240, 0.160, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def Xform "tape_border"
+    {
+        custom string am_bench:role = "visual_marker"
+
+        def Xform "front_strip" (
+            prepend references = @https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/DigitalTwin/Assets/Warehouse/Safety/Tape/Reflective/Reflective_I/ReflectiveTape2M5CM_I01_PR_NVD_01.usd@
+        )
+        {
+            double3 xformOp:translate = (-0.15, -0.08, 0.006)
+            double3 xformOp:scale = (0.0015, 0.006, 0.01)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Xform "back_strip" (
+            prepend references = @https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/DigitalTwin/Assets/Warehouse/Safety/Tape/Reflective/Reflective_I/ReflectiveTape2M5CM_I01_PR_NVD_01.usd@
+        )
+        {
+            double3 xformOp:translate = (-0.15, 0.11, 0.006)
+            double3 xformOp:scale = (0.0015, 0.006, 0.01)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Xform "left_strip" (
+            prepend references = @https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/DigitalTwin/Assets/Warehouse/Safety/Tape/Reflective/Reflective_I/ReflectiveTape2M5CM_I01_PR_NVD_01.usd@
+        )
+        {
+            double3 xformOp:translate = (-0.15, -0.11, 0.006)
+            double xformOp:rotateZ = 90
+            double3 xformOp:scale = (0.0011, 0.006, 0.01)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+        }
+
+        def Xform "right_strip" (
+            prepend references = @https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/DigitalTwin/Assets/Warehouse/Safety/Tape/Reflective/Reflective_I/ReflectiveTape2M5CM_I01_PR_NVD_01.usd@
+        )
+        {
+            double3 xformOp:translate = (0.12, -0.11, 0.006)
+            double xformOp:rotateZ = 90
+            double3 xformOp:scale = (0.0011, 0.006, 0.01)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+        }
+    }
+}

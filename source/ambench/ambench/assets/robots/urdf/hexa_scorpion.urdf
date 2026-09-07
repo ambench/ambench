@@ -1,0 +1,488 @@
+<?xml version="1.0"?>
+<robot name="hexa_scorpion_robot">
+
+    <link name="base_link">
+        <!-- INERTIAL PROPERTIES (Approximation based on summed mass and dimensions) -->
+        <inertial>
+            <!-- Total Mass: 5.0 (base) + 6*0.1 (arms) + 6*0.0025 (thrusters) = 5.615 kg -->
+            <mass value="5.615"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <inertia ixx="0.198" ixy="0.0" ixz="0.0"
+                    iyy="0.198" iyz="0.0" izz="0.460"/>
+        </inertial>
+
+        <visual>
+            <!-- Drone Base -->
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="meshes/hexa_scorpion/v2_drone_base.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <!-- <material name="CheckeredMaterial">
+                <color rgba="0.5 0.5 0.5 1"/>
+            </material> -->
+        </visual>
+
+        <!-- Propeller Arms (6 Meshes) -->
+        <visual>
+            <origin xyz="0.0 0.026 -0.011" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="meshes/hexa_scorpion/v2_prop_arm_cw.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+        <visual>
+            <origin xyz="-0.0231 0.013 -0.011" rpy="0 0 1.047"/>
+            <geometry>
+                <mesh filename="meshes/hexa_scorpion/v2_prop_arm_ccw.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+        <visual>
+            <origin xyz="-0.0231 -0.013 -0.011" rpy="0 0 2.094"/>
+            <geometry>
+                <mesh filename="meshes/hexa_scorpion/v2_prop_arm_cw.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+        <visual>
+            <origin xyz="0.0 -0.026 -0.011" rpy="0 0 3.1415"/>
+            <geometry>
+                <mesh filename="meshes/hexa_scorpion/v2_prop_arm_ccw.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+        <visual>
+            <origin xyz="0.0231 -0.013 -0.011" rpy="0 0 -2.094"/>
+            <geometry>
+                <mesh filename="meshes/hexa_scorpion/v2_prop_arm_cw.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+        <visual>
+            <origin xyz="0.0231 0.013 -0.011" rpy="0 0 -1.047"/>
+            <geometry>
+                <mesh filename="meshes/hexa_scorpion/v2_prop_arm_ccw.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+
+        <!-- COLLISION GEOMETRIES (For physics and contact) - ORIENTATIONS CORRECTED -->
+        <!-- Base collision: Using cylinder primitive for accurate capsule representation -->
+        <!-- Cylinder creates a capsule with exact radius and height (no approximation needed) -->
+        <!-- Adjust radius and length to match your actual base dimensions -->
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <!-- For a 1.0m x 1.0m square base, use radius=0.5m (half the width) -->
+                <!-- For a circular base, use the actual radius -->
+                <!-- Note: Height should be large enough to create visible capsule (not sphere) -->
+                <!-- If base is very thin, consider using a slightly larger height for visualization -->
+                <cylinder radius="0.6" length="0.05"/>
+            </geometry>
+        </collision>
+
+        <!-- Propeller Arms (6 Meshes) - Collision disabled to prevent oversized base capsule -->
+        <!-- If propeller arm collision is needed, consider moving them to separate links -->
+        <!--
+        <collision>
+            <origin xyz="0.0 0.026 -0.011" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="meshes/hexa_scorpion/v2_prop_arm_cw.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+        <collision>
+            <origin xyz="-0.0231 0.013 -0.011" rpy="0 0 1.047"/>
+            <geometry>
+                <mesh filename="meshes/hexa_scorpion/v2_prop_arm_ccw.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+        <collision>
+            <origin xyz="-0.0231 -0.013 -0.011" rpy="0 0 2.094"/>
+            <geometry>
+                <mesh filename="meshes/hexa_scorpion/v2_prop_arm_cw.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+        <collision>
+            <origin xyz="0.0 -0.026 -0.011" rpy="0 0 3.1415"/>
+            <geometry>
+                <mesh filename="meshes/hexa_scorpion/v2_prop_arm_ccw.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+        <collision>
+            <origin xyz="0.0231 -0.013 -0.011" rpy="0 0 -2.094"/>
+            <geometry>
+                <mesh filename="meshes/hexa_scorpion/v2_prop_arm_cw.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+        <collision>
+            <origin xyz="0.0231 0.013 -0.011" rpy="0 0 -1.047"/>
+            <geometry>
+                <mesh filename="meshes/hexa_scorpion/v2_prop_arm_ccw.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+        -->
+
+        <!-- ================= THRUSTERS ================= -->
+        <!-- Thruster collision geometries are disabled to prevent oversized base capsule -->
+        <!-- If thruster collision is needed, consider moving them to separate links -->
+        <!-- Thruster 0 -->
+        <visual>
+            <origin xyz="0.34175 0.1585 -0.058" rpy="-0.464 -0.252 0.060"/>
+            <geometry>
+                <cylinder radius="0.15" length="0.0025"/>
+            </geometry>
+            <material name="ThrusterColor">
+                <color rgba="0.4 0.4 0.4 1"/>
+            </material>
+        </visual>
+        <!--
+        <collision>
+            <origin xyz="0.34175 0.1585 -0.058" rpy="-0.464 -0.252 0.060"/>
+            <geometry>
+                <cylinder radius="0.15" length="0.0025"/>
+            </geometry>
+        </collision>
+        -->
+
+        <!-- Thruster 1 -->
+        <visual>
+            <origin xyz="-0.0335 0.375 -0.058" rpy="0.0 0.524 0.0"/>
+            <geometry>
+                <cylinder radius="0.15" length="0.0025"/>
+            </geometry>
+        </visual>
+        <!--
+        <collision>
+            <origin xyz="-0.0335 0.375 -0.058" rpy="0.0 0.524 0.0"/>
+            <geometry>
+                <cylinder radius="0.15" length="0.0025"/>
+            </geometry>
+        </collision>
+        -->
+
+        <!-- Thruster 2 -->
+        <visual>
+            <origin xyz="-0.30825 0.2165 -0.058" rpy="0.464 -0.252 -0.060"/>
+            <geometry>
+                <cylinder radius="0.15" length="0.0025"/>
+            </geometry>
+        </visual>
+        <!--
+        <collision>
+            <origin xyz="-0.30825 0.2165 -0.058" rpy="0.464 -0.252 -0.060"/>
+            <geometry>
+                <cylinder radius="0.15" length="0.0025"/>
+            </geometry>
+        </collision>
+        -->
+
+        <!-- Thruster 3 -->
+        <visual>
+            <origin xyz="-0.30825 -0.2165 -0.058" rpy="-0.464 -0.252 0.060"/>
+            <geometry>
+                <cylinder radius="0.15" length="0.0025"/>
+            </geometry>
+        </visual>
+        <!--
+        <collision>
+            <origin xyz="-0.30825 -0.2165 -0.058" rpy="-0.464 -0.252 0.060"/>
+            <geometry>
+                <cylinder radius="0.15" length="0.0025"/>
+            </geometry>
+        </collision>
+        -->
+
+        <!-- Thruster 4 -->
+        <visual>
+            <origin xyz="-0.0335 -0.375 -0.058" rpy="0.0 0.524 0.0"/>
+            <geometry>
+                <cylinder radius="0.15" length="0.0025"/>
+            </geometry>
+        </visual>
+        <!--
+        <collision>
+            <origin xyz="-0.0335 -0.375 -0.058" rpy="0.0 0.524 0.0"/>
+            <geometry>
+                <cylinder radius="0.15" length="0.0025"/>
+            </geometry>
+        </collision>
+        -->
+
+        <!-- Thruster 5 -->
+        <visual>
+            <origin xyz="0.34175 -0.1585 -0.058" rpy="0.464 -0.252 -0.060"/>
+            <geometry>
+                <cylinder radius="0.15" length="0.0025"/>
+            </geometry>
+        </visual>
+        <!--
+        <collision>
+            <origin xyz="0.34175 -0.1585 -0.058" rpy="0.464 -0.252 -0.060"/>
+            <geometry>
+                <cylinder radius="0.15" length="0.0025"/>
+            </geometry>
+        </collision>
+        -->
+
+    </link>
+
+    <!-- ================= Arm (converted from MuJoCo) ================= -->
+    <!-- All links and joints are top-level (URDF style), joint origins come from MuJoCo body pos/quats. -->
+    <!-- Quat (0.707,0.707,0,0) -> rpy = (pi/2, 0, 0) used where MuJoCo had that quat. -->
+
+    <!-- Arm base (mounted to base_link at pos 0.088 0 0.0) -->
+    <link name="arm_base_link">
+        <inertial>
+            <mass value="0.1"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <inertia ixx="0.0001" iyy="0.0001" izz="0.0001" ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="meshes/hexa_scorpion/v2_arm_base.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="meshes/hexa_scorpion/v2_arm_base.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="arm_base_fixed" type="fixed">
+        <!-- MuJoCo body arm_base_link pos="0.088 0 0.0" quat="1 0 0 0" -->
+        <origin xyz="0.088 0 0.0" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="arm_base_link"/>
+    </joint>
+
+    <!-- Link 1 (manipulation_link1_pitch_link) -->
+    <link name="arm_link1_pitch_link">
+        <!-- MuJoCo geom had quat 0.707 0.707 0 0 -> mesh needs a +90deg about X fix -->
+        <inertial>
+            <mass value="0.2"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <inertia ixx="0.0005" iyy="0.0001" izz="0.0005" ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="meshes/hexa_scorpion/v2_arm_link1_pitch_rotate.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="meshes/hexa_scorpion/v2_arm_link1_pitch_rotate.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="arm_link1_pitch_joint" type="revolute">
+        <!-- MuJoCo body: pos="0.0 0.0 0.06475" quat="1 0 0 0" -->
+        <origin xyz="0 0 0.06475" rpy="0 0 0"/>
+        <parent link="arm_base_link"/>
+        <child link="arm_link1_pitch_link"/>
+        <axis xyz="0 1 0"/> <!-- hinge about Y as in MuJoCo -->
+        <!-- Custom limits: [-0.1, 130/180*π] -->
+        <limit lower="0.0" upper="2.268928" effort="20" velocity="5"/>
+    </joint>
+
+    <!-- Link 2 (manipulation_link2_pitch_link) -->
+    <link name="arm_link2_pitch_link">
+        <!-- The MuJoCo body had quat 0.707 0.707 0 0 (90deg about X) -->
+        <inertial>
+            <mass value="0.2"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <inertia ixx="0.0005" iyy="0.0001" izz="0.0005" ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="meshes/hexa_scorpion/v2_arm_link2_pitch_rotate.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="meshes/hexa_scorpion/v2_arm_link2_pitch_rotate.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="arm_link2_pitch_joint" type="revolute">
+        <!-- MuJoCo body: pos="-0.3795 0.0 0.059" quat="0.707 0.707 0 0" -->
+        <!-- Convert quat->rpy: (pi/2, 0, 0) -->
+        <origin xyz="-0.3795 0 0.059" rpy="0 0 0"/>
+        <parent link="arm_link1_pitch_link"/>
+        <child link="arm_link2_pitch_link"/>
+        <axis xyz="0 -1 0"/>
+        <!-- Custom limits: [-0.1, 130/180*π] -->
+        <limit lower="0.0" upper="2.268928" effort="20" velocity="5"/>
+    </joint>
+
+    <!-- Link 3 (manipulation_link3_pitch_link) -->
+    <link name="arm_link3_pitch_link">
+        <inertial>
+            <mass value="0.2"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <inertia ixx="0.0005" iyy="0.0001" izz="0.0005" ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="meshes/hexa_scorpion/v2_arm_link3_pitch_rotate.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="meshes/hexa_scorpion/v2_arm_link3_pitch_rotate.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="arm_link3_pitch_joint" type="revolute">
+        <!-- MuJoCo body: pos="0.4475 0 0" quat="1 0 0 0" -->
+        <origin xyz="0.4475 0 0" rpy="0 0 0"/>
+        <parent link="arm_link2_pitch_link"/>
+        <child link="arm_link3_pitch_link"/>
+        <axis xyz="0 1 0"/>
+        <!-- Custom limits: [-50/180*π, 50/180*π] -->
+        <limit lower="-0.872665" upper="0.872665" effort="20" velocity="5"/>
+    </joint>
+
+    <!-- Link 4 (manipulation_link4_roll_link) -->
+    <link name="arm_link4_roll_link">
+        <inertial>
+            <mass value="0.1"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <inertia ixx="0.0001" iyy="0.0001" izz="0.0001" ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="meshes/hexa_scorpion/v2_arm_link4_roll_rotate.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="meshes/hexa_scorpion/v2_arm_link4_roll_rotate.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="arm_link4_roll_joint" type="revolute">
+        <!-- MuJoCo body: pos="0.071 0 0" quat="1 0 0 0" -->
+        <origin xyz="0.071 0 0" rpy="0 0 0"/>
+        <parent link="arm_link3_pitch_link"/>
+        <child link="arm_link4_roll_link"/>
+        <axis xyz="1 0 0"/>
+        <limit lower="-10" upper="10" effort="10" velocity="5"/>
+    </joint>
+
+    <!-- End-effector (ee) -->
+    <link name="ee_link">
+        <inertial>
+            <mass value="0.2"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <inertia ixx="0.0001" iyy="0.0001" izz="0.0001" ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+        <visual>
+            <origin xyz="0.01 0 0" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="meshes/hexa_scorpion/v2_arm_gripper_rotate.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0.01 0 0" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="meshes/hexa_scorpion/v2_arm_gripper_rotate.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="ee_fixed" type="fixed">
+        <!-- MuJoCo ee pos="0.01 0 0" -->
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <parent link="arm_link4_roll_link"/>
+        <child link="ee_link"/>
+    </joint>
+
+    <!-- ========================================================= -->
+    <!--                      LEFT FINGER LINK                     -->
+    <!-- ========================================================= -->
+
+    <link name="manipulation_lfinger_link">
+        <inertial>
+            <origin xyz="0 0 0"/>
+            <mass value="0.01"/>
+            <inertia ixx="1e-6" iyy="1e-6" izz="1e-6" ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="3.1415 0 0"/>
+            <geometry>
+                <mesh filename="meshes/hexa_scorpion/v2_gripper_long_fingertip.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" rpy="3.1415 0 0"/>
+            <geometry>
+                <mesh filename="meshes/hexa_scorpion/v2_gripper_long_fingertip.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+
+    <!-- ========================================================= -->
+    <!--                     RIGHT FINGER LINK                     -->
+    <!-- ========================================================= -->
+
+    <link name="manipulation_rfinger_link">
+        <inertial>
+            <origin xyz="0 0 0"/>
+            <mass value="0.01"/>
+            <inertia ixx="1e-6" iyy="1e-6" izz="1e-6" ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="meshes/hexa_scorpion/v2_gripper_long_fingertip.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="meshes/hexa_scorpion/v2_gripper_long_fingertip.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+
+    <!-- ========================================================= -->
+    <!--                  LEFT PRISMATIC FINGER JOINT             -->
+    <!-- ========================================================= -->
+
+    <joint name="arm_lfinger_joint" type="prismatic">
+        <origin xyz="0.08 0 0" rpy="0 0 0"/>
+        <parent link="ee_link"/>
+        <child link="manipulation_lfinger_link"/>
+        <axis xyz="0 -1 0"/>
+        <limit lower="0.001" upper="0.045" effort="10" velocity="5"/>
+    </joint>
+
+
+    <!-- ========================================================= -->
+    <!--                 RIGHT PRISMATIC FINGER JOINT             -->
+    <!-- ========================================================= -->
+
+    <joint name="arm_rfinger_joint" type="prismatic">
+        <origin xyz="0.08 0 0" rpy="0 0 0"/>
+        <parent link="ee_link"/>
+        <child link="manipulation_rfinger_link"/>
+        <axis xyz="0 1 0"/>
+        <limit lower="0.001" upper="0.045" effort="10" velocity="5"/>
+    </joint>
+
+</robot>

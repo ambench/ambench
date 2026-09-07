@@ -1,0 +1,10 @@
+[submodule "ext/pyroki"]
+	path = ext/pyroki
+	url = https://github.com/ambench/pyroki.git
+[submodule "ext/acados"]
+	path = ext/acados
+	url = https://github.com/acados/acados.git
+	ignore = dirty
+[submodule "ext/openpi"]
+	path = ext/openpi
+	url = https://github.com/ywang760/openpi

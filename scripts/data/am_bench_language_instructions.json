@@ -1,0 +1,13 @@
+{
+  "CabinetPickPlaceEEAbsPID": "open the cabinet sliding door, pick up the red can, and place it on top of the cabinet",
+  "FrameAssemblyEEAbsPID": "pick up the frame and install it on the four posts",
+  "LemonHarvestingEEAbsPID": "pick the yellow lemon and place it in the bin",
+  "OpenDoorEEAbsPID": "open the door",
+  "PegInHoleEEAbsPID": "insert the peg into the hole",
+  "PressButtonEEAbsPID": "press the button",
+  "PullLeverEEAbsPID": "pull the lever upwards",
+  "PushSliderEEAbsPID": "push the slider to the right",
+  "RotateValveEEAbsPID": "rotate the valve clockwise",
+  "TossBallEEAbsPID": "toss the ball into the bin",
+  "WipeWindowEEAbsPID": "clear the red stain on the window"
+}

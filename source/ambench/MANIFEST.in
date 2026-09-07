@@ -1,0 +1,8 @@
+# Assets resolved at runtime must ship in the sdist as well as the wheel.
+recursive-include ambench *.json *.mdl *.png *.stl *.urdf *.usd *.usda *.usdz
+
+# setup.py reads packaging metadata out of this file at build time.
+include config/extension.toml
+
+exclude ambench/**/__pycache__/*
+global-exclude *.py[cod]

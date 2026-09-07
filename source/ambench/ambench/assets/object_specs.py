@@ -1,0 +1,25 @@
+# Copyright (c) 2026, The AM-Bench Contributors.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+"""Shared nominal dimensions for local USD assets."""
+
+# Units are in meters.
+
+
+BUTTON_DEFAULT_RADIUS = 0.06
+
+CONTAINER_DEFAULT_SIZE = (0.4, 0.3, 0.17)
+
+FRAME_DEFAULT_SIZE = (1.0, 1.0, 0.05)
+
+HOLE_DEFAULT_SIDE_LENGTH = 0.06
+HOLE_DEFAULT_THICKNESS = 0.04
+
+PEG_DEFAULT_LENGTH = 0.15
+PEG_DEFAULT_RADIUS = 0.02
+
+VALVE_DEFAULT_MASS = 0.05
+VALVE_DEFAULT_OFFSET_X = -0.06
+VALVE_DEFAULT_ROTATION = (0.4999982, 0.5, 0.5, 0.5000018)
+VALVE_DEFAULT_SCALE = (1, 1.8, 1.8)

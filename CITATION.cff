@@ -1,0 +1,82 @@
+cff-version: 1.2.0
+message: "If you use AM-Bench in your research, please cite the paper below."
+title: "AM-Bench: A Modular Simulation Suite and Benchmark for Aerial Manipulation Policy Learning"
+abstract: >-
+  AM-Bench is a modular simulation suite and benchmark for aerial manipulation
+  policy learning, built on Isaac Lab. It provides representative embodiments
+  spanning underactuated, fully actuated, and overactuated systems, 12 tasks
+  across contact, transport, and constrained interaction, configurable
+  aerodynamic disturbances and actuator saturation, standard low-level
+  controllers, and baseline policy-learning algorithms.
+type: software
+version: "0.1.0"
+license: Apache-2.0
+repository-code: "https://github.com/ambench/ambench"
+url: "https://ambench.github.io/"
+keywords:
+  - aerial manipulation
+  - benchmark
+  - imitation learning
+  - policy learning
+  - robotics
+  - simulation
+authors:
+  - given-names: Yutong
+    family-names: Wang
+  - given-names: Dongjae
+    family-names: Lee
+  - given-names: Xiaofeng
+    family-names: Guo
+  - given-names: Yuanzhu
+    family-names: Zhan
+  - given-names: Yufei
+    family-names: Jiang
+  - given-names: Bavin
+    family-names: Saravanan
+  - given-names: Muqing
+    family-names: Cao
+  - given-names: Jia
+    family-names: Xie
+  - given-names: Chenyang
+    family-names: Mao
+  - given-names: Sebastian
+    family-names: Scherer
+  - given-names: Junyi
+    family-names: Geng
+  - given-names: Guanya
+    family-names: Shi
+preferred-citation:
+  type: conference-paper
+  title: "AM-Bench: A Modular Simulation Suite and Benchmark for Aerial Manipulation Policy Learning"
+  year: 2026
+  collection-title: "Proceedings of the Conference on Robot Learning (CoRL)"
+  identifiers:
+    - type: other
+      value: "arXiv:2609.00641"
+      description: arXiv preprint
+  url: "https://arxiv.org/abs/2609.00641"
+  authors:
+    - given-names: Yutong
+      family-names: Wang
+    - given-names: Dongjae
+      family-names: Lee
+    - given-names: Xiaofeng
+      family-names: Guo
+    - given-names: Yuanzhu
+      family-names: Zhan
+    - given-names: Yufei
+      family-names: Jiang
+    - given-names: Bavin
+      family-names: Saravanan
+    - given-names: Muqing
+      family-names: Cao
+    - given-names: Jia
+      family-names: Xie
+    - given-names: Chenyang
+      family-names: Mao
+    - given-names: Sebastian
+      family-names: Scherer
+    - given-names: Junyi
+      family-names: Geng
+    - given-names: Guanya
+      family-names: Shi

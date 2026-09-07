@@ -1,0 +1,29 @@
+[package]
+
+# Semantic Versioning is used: https://semver.org/
+version = "0.1.0"
+
+# Description
+category = "isaaclab"
+readme  = "README.md"
+
+title = "AM-Bench Simulation Extension"
+author = "The AM-Bench Contributors"
+maintainer = "The AM-Bench Contributors"
+description = "Isaac Lab extension for aerial manipulation robots, controllers, tasks, and data collection."
+repository = "https://github.com/ambench/ambench"
+keywords = ["aerial-manipulation", "benchmark", "isaaclab", "robotics", "simulation"]
+
+[dependencies]
+"isaaclab" = {}
+"isaaclab_assets" = {}
+"isaaclab_tasks" = {}
+
+[[python.module]]
+name = "ambench"
+
+[isaac_lab_settings]
+# Uncomment and list apt dependencies here if they become required.
+# apt_deps = ["example_package"]
+# Uncomment and provide a ros_ws path here if this extension gains ROS deps.
+# ros_ws = "path/from/extension_root/to/ros_ws"

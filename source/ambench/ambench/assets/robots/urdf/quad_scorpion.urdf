@@ -1,0 +1,140 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<robot name="quad_scorpion">
+  <!-- Link base_link -->
+  <link name="base_link">
+    <inertial>
+      <origin xyz="-0.0319126 -1.88391e-18 -0.0173673" rpy="0 0 0"/>
+      <mass value="3.68324"/>
+      <inertia ixx="0.0556697" ixy="-3.25261e-18" ixz="-0.000898162" iyy="0.0652615" iyz="8.67362e-19" izz="0.117669"/>
+    </inertial>
+  </link>
+  <!-- Link arm_base_link -->
+  <link name="arm_base_link">
+    <inertial>
+      <origin xyz="0.0123142 -1.42343e-16 -0.0179413" rpy="0 0 0"/>
+      <mass value="0.089"/>
+      <inertia ixx="1.41096e-05" ixy="-4.30802e-21" ixz="-2.28168e-07" iyy="2.46936e-05" iyz="2.53317e-23" izz="2.17364e-05"/>
+    </inertial>
+  </link>
+  <!-- Link arm_link1_yaw_link -->
+  <link name="arm_link1_yaw_link">
+    <inertial>
+      <origin xyz="-0.00060232 -8.56479e-11 -0.0274497" rpy="0 0 0"/>
+      <mass value="0.0946513"/>
+      <inertia ixx="2.57692e-05" ixy="1.15516e-13" ixz="-4.80248e-08" iyy="2.9778e-05" iyz="-1.02401e-13" izz="1.58213e-05"/>
+    </inertial>
+  </link>
+  <!-- Link arm_link2_pitch_link -->
+  <link name="arm_link2_pitch_link">
+    <inertial>
+      <origin xyz="-0.00787947 -0.101518 0.0185966" rpy="0 0 0"/>
+      <mass value="0.153398"/>
+      <inertia ixx="0.000240863" ixy="-3.02872e-05" ixz="-3.00151e-07" iyy="4.22881e-05" iyz="-1.63875e-06" izz="0.000249507"/>
+    </inertial>
+  </link>
+  <!-- Link arm_link3_pitch_link -->
+  <link name="arm_link3_pitch_link">
+    <inertial>
+      <origin xyz="-8.96112e-07 -0.0904166 0.0194766" rpy="0 0 0"/>
+      <mass value="0.138295"/>
+      <inertia ixx="0.000182884" ixy="4.2684e-09" ixz="-5.92921e-11" iyy="2.33079e-05" iyz="1.4153e-06" izz="0.000175185"/>
+    </inertial>
+  </link>
+  <!-- Link arm_link4_pitch_link -->
+  <link name="arm_link4_pitch_link">
+    <inertial>
+      <origin xyz="-0.00899915 0.0222765 0.019" rpy="0 0 0"/>
+      <mass value="0.0117358"/>
+      <inertia ixx="3.66421e-06" ixy="4.36041e-07" ixz="1.81856e-14" iyy="4.92699e-06" iyz="-2.3752e-14" izz="2.75716e-06"/>
+    </inertial>
+  </link>
+  <!-- Link ee_link -->
+  <link name="ee_link">
+    <inertial>
+      <origin xyz="0.011 -0.0241662 -0.023959" rpy="0 0 0"/>
+      <mass value="0.179557"/>
+      <inertia ixx="6.45304e-05" ixy="-1.63714e-10" ixz="1.34827e-11" iyy="0.000112494" iyz="-6.20093e-06" izz="0.000133881"/>
+    </inertial>
+  </link>
+  <!-- Link manipulation_rfinger_link -->
+  <link name="manipulation_rfinger_link">
+    <inertial>
+      <origin xyz="0.0288986 0.0143995 0.0458639" rpy="0 0 0"/>
+      <mass value="0.0285245"/>
+      <inertia ixx="8.19475e-06" ixy="-3.49724e-10" ixz="-2.37086e-06" iyy="1.57384e-05" iyz="3.0317e-10" izz="1.99562e-05"/>
+    </inertial>
+  </link>
+  <!-- Joint from ee_link to manipulation_rfinger_link -->
+  <joint name="arm_rfinger_joint" type="prismatic">
+    <origin xyz="-0.05325 -0.0465 -0.035" rpy="-2.89161e-18 1.5708 0"/>
+    <parent link="ee_link"/>
+    <child link="manipulation_rfinger_link"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="10" velocity="10" lower="-1" upper="1"/>
+  </joint>
+  <!-- Link manipulation_lfinger_link -->
+  <link name="manipulation_lfinger_link">
+    <inertial>
+      <origin xyz="-0.0288986 0.0144005 0.0458201" rpy="0 0 0"/>
+      <mass value="0.0285245"/>
+      <inertia ixx="8.19475e-06" ixy="-3.49724e-10" ixz="2.37086e-06" iyy="1.57384e-05" iyz="-3.0317e-10" izz="1.99562e-05"/>
+    </inertial>
+  </link>
+  <!-- Joint from ee_link to manipulation_lfinger_link -->
+  <joint name="arm_lfinger_joint" type="prismatic">
+    <origin xyz="0.07525 -0.0465 -0.035" rpy="2.89161e-18 -1.5708 0"/>
+    <parent link="ee_link"/>
+    <child link="manipulation_lfinger_link"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="10" velocity="10" lower="-1" upper="1"/>
+  </joint>
+  <!-- Joint from arm_link4_pitch_link to ee_link -->
+  <joint name="ee_fixed" type="fixed">
+    <origin xyz="-0.032 0.028 0.008" rpy="1.5708 -1.5708 0"/>
+    <parent link="arm_link4_pitch_link"/>
+    <child link="ee_link"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10"/>
+  </joint>
+  <!-- Joint from arm_link3_pitch_link to arm_link4_pitch_link -->
+  <joint name="arm_link4_pitch_joint" type="revolute">
+    <origin xyz="5.55112e-17 -0.124 0.0381" rpy="-3.14159 -3.47146e-17 6.93889e-18"/>
+    <parent link="arm_link3_pitch_link"/>
+    <child link="arm_link4_pitch_link"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-6.28" upper="6.28"/>
+  </joint>
+  <!-- Joint from arm_link2_pitch_link to arm_link3_pitch_link -->
+  <joint name="arm_link3_pitch_joint" type="revolute">
+    <origin xyz="-0.024 -0.128 0.038" rpy="-3.14159 6.7551e-16 1.5708"/>
+    <parent link="arm_link2_pitch_link"/>
+    <child link="arm_link3_pitch_link"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-6.28" upper="6.28"/>
+  </joint>
+  <!-- Joint from arm_link1_yaw_link to arm_link2_pitch_link -->
+  <joint name="arm_link2_pitch_joint" type="revolute">
+    <origin xyz="-0.019 2.77556e-17 -0.0405" rpy="1.5708 -2.8934e-16 1.5708"/>
+    <parent link="arm_link1_yaw_link"/>
+    <child link="arm_link2_pitch_link"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-6.28" upper="6.28"/>
+  </joint>
+  <!-- Joint from arm_base_link to arm_link1_yaw_link -->
+  <joint name="arm_link1_yaw_joint" type="revolute">
+    <origin xyz="0.000601722 -1.9758e-18 -0.036" rpy="-2.8934e-16 2.03755e-16 1.5708"/>
+    <parent link="arm_base_link"/>
+    <child link="arm_link1_yaw_link"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from base_link to arm_base_link -->
+  <joint name="arm_base_fixed" type="fixed">
+    <origin xyz="0.1 -4.45932e-18 -0.053" rpy="0 -0 0"/>
+    <parent link="base_link"/>
+    <child link="arm_base_link"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10"/>
+  </joint>
+</robot>

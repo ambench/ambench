@@ -1,0 +1,10 @@
+# Policy and pipeline configs resolved at runtime.
+recursive-include ambench_learn *.yaml
+
+# Upstream license for the vendored Universal Manipulation Interface tree.
+include ambench_learn/policies/dp/universal_manipulation_interface/LICENSE
+
+# setup.py reads packaging metadata out of this file at build time.
+include config/extension.toml
+
+global-exclude *.py[cod]
