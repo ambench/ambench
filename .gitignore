@@ -8,12 +8,6 @@
 **/*.dmp
 **/.thumbs
 
-# No USD files allowed in the repo
-# **/*.usd
-# **/*.usda
-# **/*.usdc
-# **/*.usdz
-
 # Python
 .DS_Store
 **/*.egg-info/
@@ -29,14 +23,6 @@
 # Build outputs from `python -m build`
 dist/
 
-# Captured `list_envs.py` output
-scripts/environments/envs.txt
-
-# Docker/Singularity
-**/*.sif
-docker/cluster/exports/
-docker/.container.cfg
-
 # IDE
 **/.idea/
 **/.vscode/
@@ -50,7 +36,6 @@ docker/.container.cfg
 **/videos/*
 **/wandb/*
 **/.neptune/*
-docker/artifacts/
 *.tmp
 
 # Doc Outputs
@@ -58,7 +43,7 @@ docker/artifacts/
 **/generated/*
 site/
 
-# Isaac-Sim packman
+# Isaac Sim
 _isaac_sim*
 _repo
 _build
@@ -69,15 +54,11 @@ _build
 **/logs/*
 **/recordings/*
 
-# Pre-Trained Checkpoints
+# Pre-trained checkpoints
 /.pretrained_checkpoints/
 
-# Teleop Recorded Dataset
+# Recorded datasets
 /datasets/
-
-
-# Docker history
-.isaac-lab-docker-history
 
 # Model training
 *.ckpt
@@ -92,19 +73,9 @@ c_generated_code/
 acados_ocp.json
 *_mpc_ocp.json
 
-master_shots/
-robot_master_shots/
-
-aws/
-asset_library/
-generated_task_previews/
-paper/
-
 # Latex artifacts
 **/*.aux
 **/*.fdb_latexmk
 **/*.fls
 **/*.synctex.gz
 **/*.out
-
-corl_rebuttal/**

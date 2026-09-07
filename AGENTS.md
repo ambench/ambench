@@ -7,17 +7,18 @@ Instructions for coding agents working in `ambench`, an Isaac Lab extension for 
 Read local context before making structural changes:
 
 1. `README.md`
-2. `docs/extend/index.md`
+2. `CODING_STYLE.md`
 3. The nearest matching implementation in the same package
-4. Task-specific docs:
-   - `docs/extend/task.md`
-   - `docs/extend/controller.md`
-   - `docs/extend/robot.md`
-   - `docs/extend/policy.md`
-   - `docs/workflows/index.md`
+4. The public contributor guides:
+   - [Extend AM-Bench](https://ambench.github.io/docs/extend/)
+   - [Tasks](https://ambench.github.io/docs/extend/task/)
+   - [Controllers](https://ambench.github.io/docs/extend/controller/)
+   - [Robots](https://ambench.github.io/docs/extend/robot/)
+   - [Policies](https://ambench.github.io/docs/extend/policy/)
+   - [Workflows](https://ambench.github.io/docs/workflows/)
 
 Prefer repository-consistent changes over clever rewrites.
-For code style during release cleanup, follow `CODING_STYLE.md`.
+Follow `CODING_STYLE.md` for code style.
 
 ## Quick Commands
 
@@ -103,20 +104,20 @@ The task registry is now exactly the 12 task families described in the paper.
 Do not reintroduce that material without a deliberate decision.
 
 The registry is the authority on what ships: `python scripts/environments/list_envs.py`
-prints it, and [Environment Registry](docs/reference/environments.md) is the
-written reference.
+prints it, and the [Environment Registry](https://ambench.github.io/docs/reference/environments/)
+is the written reference.
 
 Generated artifacts (datasets, checkpoints, videos, wandb runs, acados build
 output) are covered by `.gitignore` and must stay untracked.
 
-Still open, and worth a file-level decision before the public release:
+Areas that require deliberate review before changing their public support boundary:
 
 - `source/ambench/ambench/utils/camera_utils.py`
   Reason: camera support and its public support boundary need file-level review.
 - `source/ambench/ambench/utils/image_processing.py`
   Reason: image-processing support and dependencies need file-level review.
 - `ext/`
-  Reason: required dependencies may be needed for release, but submodule contents and build outputs should be curated carefully rather than treated as a monolith.
+  Reason: optional dependencies are curated individually; do not treat the directory as a monolith.
 
 ## Tech Stack And Constraints
 
@@ -129,6 +130,7 @@ Still open, and worth a file-level decision before the public release:
 - External dependencies and submodules:
   - `ext/pyroki`
   - `ext/acados`
+  - `ext/openpi`
 
 Prefer Isaac Lab APIs over direct Isaac Sim APIs unless the task clearly needs lower-level Isaac Sim behavior.
 Use `CODING_STYLE.md` as the enforced style guide for edits in this repo.

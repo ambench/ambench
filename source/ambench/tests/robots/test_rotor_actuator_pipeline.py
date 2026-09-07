@@ -4,6 +4,8 @@
 
 from isaaclab.app import AppLauncher
 
+# Keep the app alive for the pytest process. Closing it during this module's
+# teardown terminates Kit before tests from the other package can run.
 simulation_app = AppLauncher(headless=True).app
 
 """Integration coverage for the rotor actuator across the control pipeline."""
@@ -22,12 +24,6 @@ from ambench.robots.robot_io import RobotIO
 from ambench.robots.rotor_actuator import RotorActuator
 from ambench.robots.ua_hexa import rotor_layout as ua_hexa_rotor_layout
 from ambench.robots.ua_quad import rotor_layout as ua_quad_rotor_layout
-
-
-@pytest.fixture(scope="module", autouse=True)
-def close_simulation_app():
-    yield
-    simulation_app.close()
 
 
 class _FakeRobot:

@@ -45,13 +45,16 @@ Python 3.11 are required. WSL and Docker are not maintained paths.
 Once Isaac Sim and Isaac Lab are installed:
 
 ```bash
-git clone --recurse-submodules https://github.com/ambench/ambench.git
+git clone https://github.com/ambench/ambench.git
 cd ambench
 source ../IsaacLab/env_isaaclab/bin/activate
 uv pip install -e source/ambench
 uv pip install -e source/ambench_learn
 python scripts/environments/list_envs.py
 ```
+
+The repository root contains tooling configuration only; install the two packages
+from their `source/` paths as shown above rather than installing the repository root.
 
 See [Installation](https://ambench.github.io/docs/getting-started/installation/) for the
 full procedure, including the optional Pyroki (IK) and acados (MPC) components, then
@@ -77,17 +80,6 @@ python scripts/data/record_demos_scripted.py \
   --task_prompt "press the button" \
   --num_demos 10
 ```
-
-Evaluate a trained policy:
-
-```bash
-python -m ambench_learn.policies.act.eval \
-  --task PressButton-Am-FAHexa-Abs-PID-Direct-v0 \
-  --checkpoint <act-checkpoint> \
-  --num-rollouts 10 --num-envs 1 --seed 0 \
-  --output-dir <evaluation-root>/act
-```
-
 
 ## Documentation
 
