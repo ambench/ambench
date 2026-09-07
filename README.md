@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/ambench-overview.png" width="100%" alt="AM-Bench: aerial manipulation platforms, tasks, controllers, and disturbances" />
+  <img src="assets/ambench-overview.png" width="100%" alt="AM-Bench: aerial manipulation platforms, tasks, controllers, and disturbances" />
 </p>
 
 # AM-Bench
@@ -93,7 +93,7 @@ python -m ambench_learn.policies.act.eval \
 
 [ambench.github.io/docs](https://ambench.github.io/docs/) covers installation, the
 environment registry, configuration, demonstration collection, policy evaluation, and
-extension guides. The source lives in `docs/`.
+extension guides. The source lives in the [ambench.github.io](https://github.com/ambench/ambench.github.io) repository under `docs/`; send documentation changes there.
 
 Contributing: start from [Extend an Existing Environment](https://ambench.github.io/docs/extend/)
 for the task, robot, controller, and policy guides, and
