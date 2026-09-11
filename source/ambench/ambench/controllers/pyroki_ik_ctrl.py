@@ -15,13 +15,9 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 import numpy as np
+import pyroki as pk
 import torch
 import yourdfpy
-
-try:
-    import pyroki as pk
-except ImportError:
-    raise ImportError("pyroki is not installed. Please follow the instructions to install pyroki.")
 
 from ambench.controllers.pyroki_ctrl import solve_floating_base_ik
 

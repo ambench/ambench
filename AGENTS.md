@@ -47,11 +47,11 @@ Python environment:
 - For Isaac Lab or Isaac Sim Python scripts that touch `isaaclab`, `pxr`, or Omniverse app state, prefer files that use the standard `AppLauncher` bootstrap before the rest of the script runs.
 - For ad hoc Isaac-related snippets, activate `env_isaaclab`, run plain `python`, and initialize `AppLauncher` before importing or using `pxr`/Isaac Sim APIs.
 
-Install package(s):
+Install AM-Bench and its controller dependencies:
 
 ```bash
-uv pip install -e source/ambench
-uv pip install -e source/ambench_learn
+./scripts/setup/install.sh
+source scripts/setup/activate_dependencies.sh
 ```
 
 List registered environments:
@@ -117,7 +117,7 @@ Areas that require deliberate review before changing their public support bounda
 - `source/ambench/ambench/utils/image_processing.py`
   Reason: image-processing support and dependencies need file-level review.
 - `ext/`
-  Reason: optional dependencies are curated individually; do not treat the directory as a monolith.
+  Reason: third-party dependencies are curated individually; do not treat the directory as a monolith.
 
 ## Tech Stack And Constraints
 

@@ -48,17 +48,18 @@ Once Isaac Sim and Isaac Lab are installed:
 git clone https://github.com/ambench/ambench.git
 cd ambench
 source ../IsaacLab/env_isaaclab/bin/activate
-uv pip install -e source/ambench
-uv pip install -e source/ambench_learn
+./scripts/setup/install.sh
+source scripts/setup/activate_dependencies.sh
 python scripts/environments/list_envs.py
 ```
 
-The repository root contains tooling configuration only; install the two packages
-from their `source/` paths as shown above rather than installing the repository root.
+The standard installer initializes Pyroki and acados, builds the acados libraries,
+installs their Python interfaces, and installs the two AM-Bench packages from
+`source/`. Source `activate_dependencies.sh` in each new shell before running
+AM-Bench so JAX and the acados runtime use the maintained configuration.
 
 See [Installation](https://ambench.github.io/docs/getting-started/installation/) for the
-full procedure, including the optional Pyroki (IK) and acados (MPC) components, then
-[Verify Installation](https://ambench.github.io/docs/getting-started/first-run/).
+full procedure, then [Verify Installation](https://ambench.github.io/docs/getting-started/first-run/).
 
 ## Quick Start
 
