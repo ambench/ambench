@@ -19,4 +19,3 @@ uv pip install -e "$AMBENCH_ROOT/source/ambench"
 uv pip install -e "$AMBENCH_ROOT/source/ambench_learn"
 
 echo "AM-Bench and its Pyroki and acados dependencies are installed."
-echo "Run: source scripts/setup/activate_dependencies.sh"

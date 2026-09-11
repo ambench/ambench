@@ -51,7 +51,9 @@ Install AM-Bench and its controller dependencies:
 
 ```bash
 ./scripts/setup/install.sh
-source scripts/setup/activate_dependencies.sh
+export JAX_PLATFORMS=cpu
+export ACADOS_SOURCE_DIR="$(pwd)/ext/acados"
+export LD_LIBRARY_PATH="$ACADOS_SOURCE_DIR/lib:$ACADOS_SOURCE_DIR/build:$LD_LIBRARY_PATH"
 ```
 
 List registered environments:

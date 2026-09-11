@@ -49,14 +49,17 @@ git clone https://github.com/ambench/ambench.git
 cd ambench
 source ../IsaacLab/env_isaaclab/bin/activate
 ./scripts/setup/install.sh
-source scripts/setup/activate_dependencies.sh
+export JAX_PLATFORMS=cpu
+export ACADOS_SOURCE_DIR="$(pwd)/ext/acados"
+export LD_LIBRARY_PATH="$ACADOS_SOURCE_DIR/lib:$ACADOS_SOURCE_DIR/build:$LD_LIBRARY_PATH"
 python scripts/environments/list_envs.py
 ```
 
 The standard installer initializes Pyroki and acados, builds the acados libraries,
 installs their Python interfaces, and installs the two AM-Bench packages from
-`source/`. Source `activate_dependencies.sh` in each new shell before running
-AM-Bench so JAX and the acados runtime use the maintained configuration.
+`source/`. Add the three exports to `~/.bashrc`, using the absolute path to your
+AM-Bench checkout for `ACADOS_SOURCE_DIR`, so new terminals use the maintained
+JAX and acados configuration.
 
 See [Installation](https://ambench.github.io/docs/getting-started/installation/) for the
 full procedure, then [Verify Installation](https://ambench.github.io/docs/getting-started/first-run/).
